@@ -1,14 +1,29 @@
 plugins {
     id 'java'
+    id 'net.ltgt.apt' version '0.20'
 }
+
+apply plugin: 'net.ltgt.apt-idea'
 
 group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven { url "http://repo.spring.io/release" }
 }
 
+def mapstructVersion = "1.4.1.Final"
+def springVersion = "4.3.12.RELEASE"
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile "org.springframework:spring-context:${springVersion}"
+    testCompile "org.springframework:spring-test:${springVersion}"
+
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
 }
